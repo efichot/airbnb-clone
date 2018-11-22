@@ -24,21 +24,13 @@ A fullstack Graphql Airbnb Clone with React and React Native.
 
    ### Notes
 
-   ```
    - [x] JavaScript/TypeScript
-   ```
 
-   ```
    - [x] Sementic UI
-   ```
 
-   ```
    - [x] Graphql
-   ```
 
-   ```
    - [ ] ~ Firebase
-   ```
 
 
 
