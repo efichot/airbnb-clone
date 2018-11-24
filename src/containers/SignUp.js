@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Form, Button, Message } from 'semantic-ui-react'
 import { Formik } from 'formik'
 import { auth } from 'helpers/firebase'
 import { registerSchema } from 'utils/schemas'
+import context from '../context'
 
 export default function Register ({ history }) {
-  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
+  const { state } = useContext(context)
+
+  useEffect(() => {
+    const { user } = state
+    if (user) {
+      history.push('/app')
+    }
+  })
 
   return (
     <div className='register-page'>
@@ -15,9 +24,9 @@ export default function Register ({ history }) {
         onSubmit={async ({ email, password }, { setSubmitting }) => {
           try {
             await auth.createUserWithEmailAndPassword(email, password)
-            history.push('/')
+            history.push('/app')
           } catch (error) {
-            setMessage(error.message)
+            setError(error)
           }
           setSubmitting(false)
         }}
@@ -35,7 +44,7 @@ export default function Register ({ history }) {
             className='d-flex flex-column align-items-center mt-5'
             onSubmit={handleSubmit}
             loading={isSubmitting}
-            error={message !== '' || errors.email || errors.password}
+            error={error !== '' || errors.email || errors.password}
           >
             <Form.Field required error={errors.email && touched.email}>
               <label>Email</label>
@@ -61,15 +70,17 @@ export default function Register ({ history }) {
               />
               <Message error content={errors.password} />
             </Form.Field>
-            <Message error header='Action Forbidden' content={message} />
+            {error !== '' &&
+              <Message error header={error.code} content={error.message} />}
             <Button
               type='submit'
+              primary
               disabled={
                 (errors.email && touched.email) ||
                   (errors.password && touched.password)
               }
             >
-              Register
+              Sign Up
             </Button>
           </Form>
         )}

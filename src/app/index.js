@@ -1,21 +1,19 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Register from './routes/Register'
+import Header from '../components/Header'
 
-function MainApp ({ match }) {
+function index ({ match }) {
   return (
     <div className='app-container'>
       {/* sidebar */}
       <div className='app-main-container'>
-        {/* header */}
+        <Header />
         <div className='app-main-content'>
-          <Switch>
-            <Route exact path={`/register`} component={Register} />
-          </Switch>
+          <Switch />
         </div>
       </div>
     </div>
   )
 }
 
-export default MainApp
+export default index
