@@ -9,7 +9,7 @@ function index ({ match }) {
       <div className='app-main-container'>
         <Header />
         <div className='app-main-content'>
-          <Switch />
+          {/* <Switch /> */}
         </div>
       </div>
     </div>
