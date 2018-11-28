@@ -1,6 +1,5 @@
 import * as Yup from 'yup'
 
-console.log()
 export const registerSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()

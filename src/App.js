@@ -41,14 +41,11 @@ function App () {
   const { loadingStore } = state
 
   useEffect(() => {
-    async function repopulateStore () {
-      const store = await JSON.parse(localStorage.getItem('store'))
-      if (store) {
-        dispatch({ type: 'repopulate', payload: store })
-      }
-      dispatch({ type: 'stopLoader' })
+    const store = JSON.parse(localStorage.getItem('store'))
+    if (store) {
+      dispatch({ type: 'repopulate', payload: store })
     }
-    repopulateStore()
+    dispatch({ type: 'stopLoader' })
   }, [])
 
   useEffect(() => {
